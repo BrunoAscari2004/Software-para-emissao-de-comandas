@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import React from "react";
 
 const columns: GridColDef[] = [
   {
@@ -31,14 +30,15 @@ function Home() {
   const [count, setCount] = useState();
 
   return (
-    <div id="root">
-      <header>oi</header>
-      <div id="main">
-        <div id="grid">
-          <DataGrid rows={rows} columns={columns} />
-        </div>
-      </div>
-    </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 bg-cyan-500 px-4 py-5 shadow-lg text-white">
+        <h1 className="text-xl font-bold">Caixa da comunidade</h1>
+      </header>
+      <div id="header-overlay" className="h-[68px]"></div>
+      <main className="p-4">
+        <DataGrid rows={rows} columns={columns} />
+      </main>
+    </>
   );
 }
 

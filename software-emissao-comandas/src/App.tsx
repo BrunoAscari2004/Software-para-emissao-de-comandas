@@ -1,4 +1,3 @@
-import "./App.css";
 import Home from "./Home";
 import "./shared/styles/global.scss";
 
