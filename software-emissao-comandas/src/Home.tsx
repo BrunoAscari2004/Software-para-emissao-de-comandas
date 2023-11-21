@@ -90,7 +90,7 @@ function Home() {
         <h1 className="text-xl font-bold ">Caixa da comunidade</h1>
         <img src="image_2023_11_20T21_33_51_071Z.png" alt="" />
       </header>
-      <div id="header-overlay" className="h-[68px]"></div>
+      <div className="h-[68px]"></div>
       <main className="p-4">
         <DataGrid
           disableRowSelectionOnClick
@@ -99,35 +99,32 @@ function Home() {
           getRowId={(row) => row.id}
           hideFooterPagination
         />
+
+        <div>
+          TODO: Colocar no Footer do DataGrid (ler na doc){" "}
+          {currencyFormatter.format(total)}
+        </div>
+
+        <div className="flex items-center justify-center gap-20 px-6 py-10 ">
+          <button
+            className="text-white bg-green-500 hover:bg-green-800   font-medium rounded-full text-lg px-8 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
+            onClick={() => {
+              console.log(rows);
+            }}
+          >
+            Finalizar
+          </button>
+          <button className="text-white bg-blue-500 hover:bg-blue-800   font-medium rounded-full text-lg px-8 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
+            Resumo
+          </button>
+          <button
+            className="text-white bg-red-500 hover:bg-red-800 font-medium rounded-full text-lg px-8 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            onClick={() => handleCancel}
+          >
+            Cancelar
+          </button>
+        </div>
       </main>
-
-      <div>
-        TODO: Colocar no Footer do DataGrid (ler na doc){" "}
-        {currencyFormatter.format(total)}
-      </div>
-
-      <div
-        id="buttons"
-        className="flex items-center justify-center gap-20 px-6 py-10 "
-      >
-        <button
-          className="text-white bg-green-500 hover:bg-green-800   font-medium rounded-full text-lg px-8 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
-          onClick={() => {
-            console.log(rows);
-          }}
-        >
-          Finalizar
-        </button>
-        <button className="text-white bg-blue-500 hover:bg-blue-800   font-medium rounded-full text-lg px-8 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">
-          Resumo
-        </button>
-        <button
-          className="text-white bg-red-500 hover:bg-red-800 font-medium rounded-full text-lg px-8 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-          onClick={() => handleCancel}
-        >
-          Cancelar
-        </button>
-      </div>
     </>
   );
 }
