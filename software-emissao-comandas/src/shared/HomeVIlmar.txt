@@ -1,8 +1,17 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridCellEditStopParams,
+  GridCellEditStopReasons,
+  GridColDef,
+  GridRenderCellParams,
+} from "@mui/x-data-grid";
 import "./shared/images/image_2023_11_20T21_33_51_071Z.png";
+import produtos from "./produtos-precos.json";
+type IProdutos = (typeof produtos)[number];
+type TQuantidades = { quantidade: number; total: number };
 
-const columns = (setTotal: any, setQuantidade: any): GridColDef[] => [
+const columns = (): GridColDef[] => [
   {
     field: "produto",
     headerName: "Produto",
@@ -21,7 +30,6 @@ const columns = (setTotal: any, setQuantidade: any): GridColDef[] => [
     align: "center",
     flex: 1,
     editable: true,
-    renderCell: (params) => setQuantidade(params.row),
   },
   {
     field: "total",
@@ -63,6 +71,16 @@ function Home() {
   const [total, setTotal] = useState<GridRenderCellParams>();
   const [quantidade, setQuantidade] = useState();
 
+  const [mapa, setMapa] = useState(
+    produtos.reduce(
+      (acc, curr) => ({
+        ...acc,
+        [curr.id]: { ...curr, quantidade: 0, total: 0 },
+      }),
+      {} as Record<IProdutos["id"], IProdutos & TQuantidades>
+    )
+  );
+
   useEffect(() => {});
 
   const handelUpdate = () => {};
@@ -71,6 +89,7 @@ function Home() {
     rows.map((row) => row.quantidade == 0 && row.total == 0);
   };
 
+  console.log(mapa);
   return (
     <>
       {console.log(total, "q", quantidade, rows)}
@@ -82,8 +101,26 @@ function Home() {
       <main className="p-4">
         <DataGrid
           disableRowSelectionOnClick
-          rows={rows}
-          columns={columns(setTotal, setQuantidade)}
+          onCellEditStop={(
+            { row: { id } }: GridCellEditStopParams<IProdutos & TQuantidades>,
+            ev
+          ) => {
+            const {
+              target: { value },
+            } = ev as {
+              target: { value: string };
+            };
+            setMapa((state) => ({
+              ...state,
+              [id]: {
+                ...state[id],
+                quantidade: Number(value),
+                total: state[id].preco * Number(value),
+              },
+            }));
+          }}
+          rows={Object.values(mapa)}
+          columns={columns(setMapa)}
           getRowId={(row) => row.id}
           hideFooterPagination
         />
@@ -114,3 +151,5 @@ function Home() {
 }
 
 export default Home;
+
+/* state do mapoa , passar ele nas colunas , depois  atuualizar o state com tudo que ele tem mas na posciao daquel item atualizo a quantidade */
