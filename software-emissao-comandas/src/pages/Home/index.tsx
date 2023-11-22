@@ -215,8 +215,10 @@ function Home() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 bg-blue-500 px-4 py-5 shadow-lg text-white z-10">
-        <h1 className="text-xl font-bold ">Caixa da comunidade</h1>
+      <header className="fixed top-0 left-0 right-0 bg-blue-500 shadow-lg text-white z-10">
+        <div className="relative flex-1 px-4 py-5">
+          <h1 className="text-xl font-bold ">Caixa da comunidade</h1>
+        </div>
       </header>
       <div className="h-[68px]"></div>
 
@@ -245,17 +247,24 @@ function Home() {
           onPaginationModelChange={setPaginationModel}
           slots={{
             footer: () => (
-              <footer className="flex font-bold text-lg border-t-2 border-blue-500 flex-col">
+              <div className="flex font-bold text-lg border-t-2 border-blue-500 flex-col">
                 <div className="flex justify-between py-2 px-2 pr-[70px]">
                   <span>Total:</span>
                   <span>{currencyFormatter.format(total)}</span>
                 </div>
                 <GridFooter style={{ borderColor: "#D1D5DB" }} />
-              </footer>
+              </div>
             ),
           }}
         />
         <div className="flex items-center justify-center gap-20 px-6 py-10 "></div>
+
+        <footer className="fixed bottom-1 right-4">
+          <span className="text-gray-500 text-xs">
+            Feito por Gustavo Cauzzi, Bruno Ascari e João Bufon de Almeida como
+            cortesia da família NL ❤
+          </span>
+        </footer>
       </main>
     </>
   );
