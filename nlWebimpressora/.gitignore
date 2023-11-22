@@ -1,0 +1,8 @@
+/node_modules/
+/target/
+/.metadata/
+.idea/sonarlint
+yarn.lock
+yarn-error.log
+version.json
+/dist/

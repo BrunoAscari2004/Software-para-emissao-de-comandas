@@ -1,0 +1,7 @@
+output.css
+target/
+src/java/
+src/resources/
+.metadata/
+.mvn/
+.settings/

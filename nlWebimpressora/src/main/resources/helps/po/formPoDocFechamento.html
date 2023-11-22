@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <script src="/NLWebII/helps/base/statics/jquery-3.7.0.min.js"></script>
+    <link href="/NLWebII/helps/base/statics/bootstrap-5.0.2.min.css" rel="stylesheet" />
+    <script src="/NLWebII/helps/base/statics/bootstrap.min.js"></script>
+    <link href="/NLWebII/helps/base/statics/global.css" rel="stylesheet" />
+    <script src="/NLWebII/helps/base/js/main.js" type="text/javascript" defer async></script>
+    <meta charset="UTF-8" />
+    <title>Transfere valores para outro caixa e faz fechamento do caixa</title>
+  </head>
+  <body>
+    <header>
+      <img src="/NLWebII/helps/base/assets/nl-logo.png" alt="NL - Tecnologia feita por pessoas" />
+    </header>
+    <main>
+      <div class="card shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <h1 class="text-primary">Transfere valores para outro caixa e faz fechamento do caixa</h1>
+          
+          <P>Para realizar este processo de transferência é necessário estar logado no sistema com o caixa que receberá os valores (caixa destino).</P>
+
+		<H5>Caixa origem</H5>
+		<P>Código do caixa origem. Se o parâmetro 'Postos/11 - Controlar grupo de caixa para abertura e fcto', for igual a 1, na LOV do caixa irão aparecer somente os caixas ainda não conciliados do grupo do cadastro do caixa. Se o parâmetro for zero, na LOV irão aparecer somente os caixas ainda não conciliados. </P>
+		<P>Quando caixa origem for trânsito irá trazer o valor do saldo atual (valor no sistema) na coluna valor informado como default, permitindo a alteração deste valor.</P>
+		<P>Data de transferência. Se o parâmetro 'Postos/21 - Data de transferência do caixa', for igual a 1, faz a saída do caixa origem com a data que o movimento aconteceu e a entrada no caixa destino com a data do sistema. Se o parâmetro for igual a 2, faz a saída do caixa origem e a entrada no caixa destino com a data que o movimento aconteceu. </P>
+		<P>Quando for chamado por outro programa irá fazer a transferências dos documentos que estiverem
+		   parametrizados para transferir ( cadastrados na tabela po_docs_caixa).</P>
+		<P>Se o tipo de caixa for PDV e o parâmetro 'Postos/U/83' tiver valor informado, ao setar o caixa posto (po_caixas) origem como conciliado, deverá marcar o caixa posto informado no parâmetro também como conciliado, com as mesmas informações setadas para o caixa origem.</P>
+		<P>Se o caixa origem informado for um caixa PDV (módulo GV estiver configurado, ge_caixas.tip_caixa_pdv 1 ou 2, e ge_caixas.tip_caixa = 1), então verificará se existe algum movimento pendente de integração com a retaguarda (algum registro na tabela gv_movimentos cujo campo tip_status esteja como 1, 2 ou 3), caso exista, será apresentada a mensagem 'PO/204- Caixa possui movimentos pendentes na integração GV-NLGestão. Transferência não permitida!'.
+		</P>
+
+
+		<H5>Data</H5>
+		<P>Data do caixa</P>
+
+		<P><H5>Operador</H5></P>
+		<P>Código completo na máscara e nome do operador que operou o caixa selecionado.</P>
+
+		<H5>Caixa destino</H5>
+		<P>Código do caixa para a transferência. Na LOV irão aparecer somente os caixas destino, configurados para o caixa origem. </P>
+
+		<H5>Documento</H5>
+		<P>Código do documento</P>
+
+		<H5>Valor no sistema</H5>
+		<P>Valor do saldo atual (entradas - saídas) do documento para o caixa (cod_caixa + num_caixa). Só considera a data ao buscar os movimentos do caixa se o parâmetro Postos/21 (Data de transferência do caixa) estiver configurado como 1 (Data do sistema), neste caso, a data do movimento de caixa deve estar entre a data de abertura (po_caixas.hra_abertura) e data de fechamento (po_caixas.hra_fechamento) do caixa origem.</P>
+
+		<P>Se o tipo do caixa origem for PDV (GE_CAIDAS.TIP_CAIXA = 1), então não serão considerados neste saldo os movimentos referentes as operações informadas no parâmetro Caixa_GV/16 (Operações de caixa que não devem ser consideradas na transferência de valores).</P>
+
+		<P>Quando o documento for igual ao documento informado no parâmetro 'Postos/15' (Documento do caixa para compor líquido), mostra o valor do saldo atual do documento menos o saldo atual dos documentos informados no parâmetro 'Postos/16' (Documento do caixa  subtrai) e mais o saldo atual dos documentos informados no parâmetro 'Postos/17' (Documento do caixa  soma).</P>
+
+
+		<H5>Valor informado</H5>
+		<P>Valor do saldo informado no caixa para o documento.</P>
+		<P>Se o documento tiver o indicador 'Entrada no saldo' desmarcado, ou seja, os valores deste documento não entram no saldo do caixa, então este campo é populado inicialmente com o mesmo valor listado no campo 'Valor no sistema'. Se o documento já teve valor informado anteriormente para o caixa, então carrega este valor para o campo (valor gravado na tabela cx_doc_informado).</P>
+
+		<H5>Perda / Sobra</H5>
+		<P>Valor da perda ou sobra.</P>
+
+		<H5>Diferença</H5>
+		<P>Valor da diferença. É o valor informado - valor no sistema.</P>
+
+		<H5>Transferir</H5>
+		<P>Realiza a transferência entre os caixas</P>
+		<P>Após fazer a conciliação (transferência dos valores), se no cadastro do caixa origem o indicador de 'Exige saldos antes de realizar fechamento caixa' estiver marcado, executa a rotina para realizar o fechamento dos saldos do caixa e saldos dos documentos.</P>
+
+		<H5>Imprimir</H5>
+		<P>Irá imprimir um resumo dos valores, igual a tela, na primeira página. E na segunda um resumo dos produtos vendidos no caixa e na data informada.</P>
+
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

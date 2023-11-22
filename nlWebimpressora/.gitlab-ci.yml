@@ -1,0 +1,43 @@
+variables:
+  MAVEN_OPTS: >-
+    -Dhttps.protocols=TLSv1.2
+    -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+    -Dorg.slf4j.simpleLogger.showDateTime=true
+    -Djava.awt.headless=true
+
+  MAVEN_CLI_OPTS: >-
+    --batch-mode
+    --errors
+    --fail-at-end
+    --show-version
+    --no-transfer-progress
+    -DinstallAtEnd=true
+    -DdeployAtEnd=true
+
+image: maven:3-openjdk-11
+
+cache:
+  paths:
+    - .m2/repository
+
+.build:
+  stage: build
+  script:
+    - 'mvn clean package -DskipTests'
+  after_script:
+    - 'sol=$(echo $CI_COMMIT_BRANCH | sed -r "s/.*\/([0-9][0-9][0-9][0-9][0-9][0-9]\_[0-9]).*/\1/")'
+    - 'echo "Copiando o arquivo para /mnt/vms-fss-01/projetos_customizados/$sol"'
+    - 'if [ $sol != $CI_COMMIT_BRANCH ]; then '
+    - 'mkdir -p /mnt/vms-fss-01/projetos_customizados/$sol'
+    - 'cp target/NLWeb.war /mnt/vms-fss-01/projetos_customizados/$sol'
+    - 'else'
+    - 'echo "Nothing to do. Cannot find sol."'
+    - 'fi'
+  artifacts:
+    paths:
+      - target/NLWeb.war
+    expire_in: 1 week
+
+build:jdk11:
+  extends:
+    - .build

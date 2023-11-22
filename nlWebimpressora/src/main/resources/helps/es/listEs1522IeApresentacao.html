@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <script src="/NLWebII/helps/base/statics/jquery-3.7.0.min.js"></script>
+    <link href="/NLWebII/helps/base/statics/bootstrap-5.0.2.min.css" rel="stylesheet" />
+    <script src="/NLWebII/helps/base/statics/bootstrap.min.js"></script>
+    <link href="/NLWebII/helps/base/statics/global.css" rel="stylesheet" />
+    <script src="/NLWebII/helps/base/js/main.js" type="text/javascript" defer async></script>
+    <meta charset="UTF-8" />
+    <title>Apresentações dos itens das etiquetas</title>
+  </head>
+  <body>
+    <header>
+      <img src="/NLWebII/helps/base/assets/nl-logo.png" alt="NL - Tecnologia feita por pessoas" />
+    </header>
+    <main>
+      <div class="card shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <h1 class="text-primary">ES - Apresentações dos itens das etiquetas</h1>
+          <p>Esta página permite a consulta e inclusão de valores de apresentação dos itens das etiquetas.</p>
+          <hr />
+          <div class="card my-4">
+            <div class="card-body p-2">
+              <div class="tab-content" id="pills-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-pesquisa"
+                  role="tabpanel"
+                  aria-labelledby="pills-pesquisa-tab"
+                >
+                  <h2 class="text-primary" id="example-section">Pesquisa</h2>
+                  <table class="table" aria-describedby="example-section">
+                    <thead>
+                      <tr>
+                        <th>Campo</th>
+                        <th>Conteúdo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Item</td>
+                        <td>Código do item conforme a máscara.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-listagem"
+                  role="tabpanel"
+                  aria-labelledby="pills-listagem-tab"
+                >
+                  <h2 class="text-primary" id="example-section">Listagem</h2>
+                  <table class="table" aria-describedby="example-section">
+                    <thead>
+                      <tr>
+                        <th>Campo</th>
+                        <th>Conteúdo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>UM</td>
+                        <td>
+                          Código da unidade de medida para apresentação do item nas etiquetas. Não é permitido cadastrar
+                          duas unidade de medida iguais para o mesmo item.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Descrição</td>
+                        <td>Descrição da unidade de medida de apresentação do item.</td>
+                      </tr>
+                      <tr>
+                        <td>FC</td>
+                        <td>Fator de conversão da unidade de medida de apresentação informada para o item.</td>
+                      </tr>
+                      <tr>
+                        <td>%</td>
+                        <td>
+                          Percentual de sugestão para gerar a quantidade de etiquetas. Exemplo: Se neste campo o
+                          percentual for de 50% e a quantidade de etiquetas disponível for 10, então ele levará como
+                          sugestão a impressão de 5 etiquetas que corresponte aos 50% informados. Valor pode ser
+                          atualizado através do campo.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Botão excluir</td>
+                        <td>Exclui o registro.</td>
+                      </tr>
+                      <tr>
+                        <td>Botão novo</td>
+                        <td>Cria um novo registro.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-manutencao"
+                  role="tabpanel"
+                  aria-labelledby="pills-manutencao-tab"
+                >
+                  <h2 class="text-primary" id="example-section">Manutenção</h2>
+                  <table class="table" aria-describedby="example-section">
+                    <thead>
+                      <tr>
+                        <th>Campo</th>
+                        <th>Conteúdo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Item</td>
+                        <td>Código do item conforme a máscara.</td>
+                      </tr>
+                      <tr>
+                        <td>UM</td>
+                        <td>
+                          Código da unidade de medida para apresentação do item nas etiquetas. Não é permitido cadastrar
+                          duas unidade de medida iguais para o mesmo item.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Fator de conversão</td>
+                        <td>Fator de conversão da unidade de medida de apresentação informada para o item.</td>
+                      </tr>
+                      <tr>
+                        <td>%Etiquetas</td>
+                        <td>
+                          Percentual de sugestão para gerar a quantidade de etiquetas. Exemplo: Se neste campo o
+                          percentual for de 50% e a quantidade de etiquetas disponível for 10, então ele levará como
+                          sugestão a impressão de 5 etiquetas que corresponte aos 50% informados. Valor pode ser
+                          atualizado através do campo.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Etiquetas</td>
+                        <td>
+                          Indicador de qual unidade de medida deve ser utilizada como default na geração das etiquetas
+                          para o item. É necessário possuir uma unidade de medida definida como default.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Botão voltar</td>
+                        <td>Volta para a lista de valores de apresentação do item.</td>
+                      </tr>
+                      <tr>
+                        <td>Botão duplicar</td>
+                        <td>Duplica o registro.</td>
+                      </tr>
+                      <tr>
+                        <td>Botão excluir</td>
+                        <td>Exclui o registro.</td>
+                      </tr>
+                      <tr>
+                        <td>Botão salvar</td>
+                        <td>Salva o registro.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <script src="/NLWebII/helps/base/statics/jquery-3.7.0.min.js"></script>
+    <link href="/NLWebII/helps/base/statics/bootstrap-5.0.2.min.css" rel="stylesheet" />
+    <script src="/NLWebII/helps/base/statics/bootstrap.min.js"></script>
+    <link href="/NLWebII/helps/base/statics/global.css" rel="stylesheet" />
+    <script src="/NLWebII/helps/base/js/main.js" type="text/javascript" defer async></script>
+    <script src="/NLWebII/helps/base/js/utils.js" type="text/javascript"></script>
+    <title>Help não encontrado</title>
+    <meta charset="UTF-8" />
+    <script>
+      const loadPageName = async () => {
+        const helpInfo = await getCurrentHelpDetails();
+        if (helpInfo.requestedHelp !== null) {
+          document.getElementById(
+            'error-message',
+          ).innerHTML = `Página de help "${helpInfo.requestedHelp}" não encontrada no servidor!`;
+        }
+      };
+
+      loadPageName();
+    </script>
+  </head>
+  <body>
+    <header>
+      <img src="/NLWebII/helps/base/assets/nl-logo.png" alt="NL - Tecnologia feita por pessoas" />
+    </header>
+    <main>
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-column align-items-center">
+            <h5 class="card-title p-2 rounded bg-danger text-white" style="width: fit-content">Atenção!</h5>
+            <p class="card-text text-danger" style="font-weight: bold" id="error-message">
+              Informe o caminho para o help usando <code>useNlHelp</code>
+            </p>
+          </div>
+
+          <hr />
+
+          <h2 class="text-primary">Guia para desenvolvimento</h2>
+
+          <p>
+            Para desenvolver um HELP, é necessário criar uma pasta no seu computador localizado em
+            <code>/workspace_eclipse/helps</code> e por a estrutura de arquivos presente
+            <code> /src/main/resources/helps </code> lá dentro. Esse passo é necessário pois não temos como refletir as
+            mudanças nos arquivos de forma instantânea sem saber o lugar comum de onde buscar os arquivos. Também não é
+            possível apontar para os arquivos presentes no workspace pois o runtime do java está localizado no Wildfly
+            que é completamente desconexo do workspace atual.
+          </p>
+
+          <p>Abaixo há o comando que já irá fazer a cópia dos helps atuais para a pasta necessária</p>
+
+          <div class="p-3 mb-3 border-start border-primary rounded-end border-2">
+            <code>ln -s &lt;caminho_seu_workspace&gt;/src/main/resources/helps /workspace_eclipse/helps</code>
+          </div>
+
+          <p>
+            Lembrando então que é necessário por os arquivos desenvolvidos dentro de
+            <code> /src/main/resources/helps </code> quando finalizados para que sejam mandados para o Git e sejam
+            postos dentro da build, caso contrário, esses não irão estar presentes do arquivos WAR
+          </p>
+
+          <p>
+            Para fazer o link do Help com a página, deve ser chamado a hook
+            <code>useNlHelp</code> passando como primeiro parâmetro o caminho a partir da pasta
+            <code> /src/main/resources/helps </code> mencionada anteriormente.
+          </p>
+
+          <hr />
+
+          <h2 class="text-primary">Sobre os helps</h2>
+
+          <p>
+            Os helps são desenvolvidos em <b>HTML Puro</b> com o auxilio do <b>JQuery</b> e do <b>Bootstrap 5</b>, de
+            forma que assim tempos muitas funcionalidades já prontas, estilizadas, e com o melhor de tudo,
+            <b>documentação a vontade!</b>
+          </p>
+
+          <p>
+            Podemos utilizar então todas as funcionalidades do bootstrap como abas, menus, collapses, tooltips, modais,
+            popovers, dropdowns, cards, botões, etc.
+          </p>
+
+          <p>Para exemplos de componentes, acessar o help da página <code>/nl/nlTestaComponente</code></p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
