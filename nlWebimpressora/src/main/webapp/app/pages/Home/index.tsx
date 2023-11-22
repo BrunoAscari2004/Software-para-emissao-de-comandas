@@ -1,4 +1,17 @@
-import { Button, CircularProgress, IconButton, IconButtonProps, TextField, Tooltip } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  FormControl,
+  IconButton,
+  IconButtonProps,
+  Input,
+  InputLabel,
+  TextField,
+  Tooltip,
+} from '@mui/material';
 import { DataGrid, GridColDef, GridFooter, GridPaginationModel, GridRenderCellParams } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -106,6 +119,7 @@ type Row = {
 function Home() {
   const [originalRows, setOriginalRows] = useState<Record<Row['id'], Row>>({});
   const [editedRows, setEditedRows] = useState<Row[]>([]);
+  const [isFormDialogOpen, setFormDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [products, setRows] = useState<Row[]>([
     { id: 1, nome: 'Pastel', preco: 5.0, quantidade: 0 },
@@ -208,6 +222,9 @@ function Home() {
     console.log('');
   };
 
+  // adicionar um item teste
+  const handleNewItem = () => {};
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-blue-500 shadow-lg text-white z-10">
@@ -244,6 +261,9 @@ function Home() {
             footer: () => (
               <div className="flex font-bold text-lg border-t-2 border-blue-500 flex-col">
                 <div className="flex justify-between py-2 pl-2">
+                  <Button variant="contained" onClick={() => setFormDialogOpen(true)}>
+                    Adicionar novo item
+                  </Button>
                   <span>Total:</span>
                   <div className="flex flex-row items-center">
                     <span>{currencyFormatter.format(total)}</span>
@@ -254,6 +274,7 @@ function Home() {
             ),
           }}
         />
+        {/* esses aqui temos que arrumar ainda passar para aquele botão resumo */}
         <div className="w-[65px] flex justify-center">
           <PrintAllButton editedProducts={editedRows} originalProducts={originalRows} onClick={handleConfirmPrintAll} />
         </div>
@@ -271,6 +292,14 @@ function Home() {
           </span>
         </footer>
       </main>
+      <Dialog open={isFormDialogOpen} onClose={() => setFormDialogOpen(false)} fullWidth maxWidth="sm">
+        <div>
+          <DialogTitle>Adicionar Item:</DialogTitle>
+        </div>
+        <DialogContent>
+          <FormControl></FormControl>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
