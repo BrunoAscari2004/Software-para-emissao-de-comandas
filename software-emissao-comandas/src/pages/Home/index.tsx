@@ -1,6 +1,7 @@
 import {
   CircularProgress,
   IconButton,
+  IconButtonProps,
   TextField,
   Tooltip,
 } from "@mui/material";
@@ -89,6 +90,10 @@ const generateColumns = (
     width: 60,
     headerAlign: "center",
     align: "center",
+    disableReorder: true,
+    disableColumnMenu: true,
+    disableExport: true,
+    sortable: false,
     renderCell: (p) => {
       const isMoreThanBefore = p.row.quantidade > p.row.originalQtd;
       const isFewerThanBefore = p.row.quantidade < p.row.originalQtd;
@@ -183,7 +188,15 @@ function Home() {
     setRows(newRows);
   };
 
-  const handlePrint = async (product: Row) => {
+  const handleConfirmPrintAll = async (products: Row[]) => {
+    const confirmation = await confirmationToast(
+      "Você tem certeza que deseja imprimir TODaS as impressões pendentes?"
+    );
+    if (!confirmation) return;
+    handlePrint(products);
+  };
+
+  const handleConfirmPrint = async (product: Row) => {
     const qtdToPrint = product.quantidade - originalRows[product.id].quantidade;
 
     const message =
@@ -203,7 +216,11 @@ function Home() {
 
     const confirmation = await confirmationToast(message);
     if (!confirmation) return;
-    console.log("Imprime e salva ", product);
+    handlePrint([product]);
+  };
+
+  const handlePrint = async (productsToPrint: Row[]) => {
+    console.log("Imprime e salva ", productsToPrint);
     setLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000)); // Chamada À API
@@ -213,8 +230,19 @@ function Home() {
     } finally {
       setLoading(false);
     }
-    setOriginalRows({});
-    setEditedRows([]);
+    setOriginalRows((state) => {
+      return Object.fromEntries(
+        Object.entries(state).filter(
+          ([key]) => !productsToPrint.some((prod) => prod.id === Number(key))
+        )
+      );
+    });
+    setEditedRows((state) =>
+      state.filter(
+        (editedProd) =>
+          !productsToPrint.some((prod) => prod.id === editedProd.id)
+      )
+    );
   };
 
   return (
@@ -244,7 +272,7 @@ function Home() {
             ...product,
             originalQtd: originalRows[product.id]?.quantidade,
           }))}
-          columns={generateColumns(editFieldRow, handlePrint)}
+          columns={generateColumns(editFieldRow, handleConfirmPrint)}
           getRowId={(row) => row.id}
           pageSizeOptions={[10, 25, 50, 100]}
           paginationModel={paginationModel}
@@ -252,9 +280,18 @@ function Home() {
           slots={{
             footer: () => (
               <div className="flex font-bold text-lg border-t-2 border-blue-500 flex-col">
-                <div className="flex justify-between py-2 px-2 pr-[70px]">
+                <div className="flex justify-between py-2 pl-2">
                   <span>Total:</span>
-                  <span>{currencyFormatter.format(total)}</span>
+                  <div className="flex flex-row items-center">
+                    <span>{currencyFormatter.format(total)}</span>
+                    <div className="w-[65px] flex justify-center">
+                      <PrintAllButton
+                        editedProducts={editedRows}
+                        originalProducts={originalRows}
+                        onClick={handleConfirmPrintAll}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <GridFooter style={{ borderColor: "#D1D5DB" }} />
               </div>
@@ -273,5 +310,42 @@ function Home() {
     </>
   );
 }
+
+interface PrintAllButtonProps extends Omit<IconButtonProps, "onClick"> {
+  editedProducts: Row[];
+  originalProducts: Record<Row["id"], Row>;
+  onClick: (productsToPrint: Row[]) => any;
+}
+const PrintAllButton: React.FC<PrintAllButtonProps> = ({
+  editedProducts,
+  originalProducts,
+  onClick,
+  ...props
+}) => {
+  const productsToPrint = editedProducts.filter(
+    (editedProduct) =>
+      editedProduct.quantidade > originalProducts[editedProduct.id].quantidade
+  );
+
+  console.log("editedProducts: ", editedProducts);
+  console.log("productsToPrint: ", productsToPrint);
+  const shouldRender = productsToPrint.length > 1;
+
+  return (
+    <Tooltip title={shouldRender ? "Imprimir todos" : ""} arrow placement="top">
+      <div
+        className={`transition-all ${shouldRender ? "opacity-1" : "opacity-0"}`}
+      >
+        <IconButton
+          {...props}
+          disabled={!shouldRender}
+          onClick={() => onClick(productsToPrint)}
+        >
+          <FiPrinter className="text-blue-500" size={20} />
+        </IconButton>
+      </div>
+    </Tooltip>
+  );
+};
 
 export default Home;
