@@ -57,6 +57,10 @@ const generateColumns = (
           value={params.row.quantidade}
           type="number"
           fullWidth
+          onKeyDownCapture={(e) =>
+            (e.key === "ArrowUp" || e.key === "ArrowDown") &&
+            e.stopPropagation()
+          }
           inputProps={{
             style: {
               color: hasChanged ? textColor : undefined,
@@ -261,8 +265,8 @@ function Home() {
 
         <footer className="fixed bottom-1 right-4">
           <span className="text-gray-500 text-xs">
-            Feito por Gustavo Cauzzi, Bruno Ascari e João Bufon de Almeida como
-            cortesia da família NL ❤
+            Feito por Gustavo André Cauzzi, Bruno Ascari e João Vitor Bufon de
+            Almeida como cortesia da família NL ❤
           </span>
         </footer>
       </main>
