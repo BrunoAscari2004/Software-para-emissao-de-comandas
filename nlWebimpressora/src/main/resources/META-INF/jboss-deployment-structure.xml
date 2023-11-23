@@ -8,8 +8,6 @@
             <module name="org.apache.commons.collections" export="true" />
             <module name="org.apache.commons.logging" export="true" />
             <module name="org.apache.commons.codec" export="true" />
-			<module name="oracle.jdbc" export="true" />
-			<module name="org.jboss.ironjacamar.jdbcadapters" export="true" />
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>

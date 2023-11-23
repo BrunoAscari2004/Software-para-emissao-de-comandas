@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="NLWebII" />
         <module name="nlwebii" />
+        <module name="BGJMComandas" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BGJMComandas" options="-parameters" />
       <module name="NLWebII" options="-parameters" />
       <module name="nlwebii" options="-parameters" />
     </option>

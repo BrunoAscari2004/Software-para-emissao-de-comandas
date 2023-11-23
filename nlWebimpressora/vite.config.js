@@ -6,7 +6,7 @@ import path from 'path';
 export default defineConfig(({ mode }) => ({
     root: './src/main/webapp',
     publicDir: './src/main/webapp/app/shared/assets',
-    base: mode === 'development' ? '' : '/NLWebII',
+    base: mode === 'development' ? '' : '/BGJMComandas',
     build: {
         // Relative to the root
         outDir: '../../../target/dist',
@@ -52,17 +52,17 @@ export default defineConfig(({ mode }) => ({
         proxy:
             mode === 'development'
                 ? {
-                      '/NLWebII/api/': {
+                      '/BGJMComandas/api/': {
                           target: 'http://127.0.0.1:8080/',
                           secure: false,
                           changeOrigin: true,
                       },
-                      '/NLWebII/helps/': {
+                      '/BGJMComandas/helps/': {
                           target: 'http://127.0.0.1:8080/',
                           secure: false,
                           changeOrigin: true,
                       },
-                      '/NLWebII/ws/': {
+                      '/BGJMComandas/ws/': {
                           target: 'http://127.0.0.1:8080/',
                           secure: false,
                           ws: true,

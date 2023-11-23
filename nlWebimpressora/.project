@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>NLWebII</name>
+	<name>BGJMComandas</name>
 	<comment></comment>
 	<projects>
-		<project>NLWebII</project>
+		<project>BGJMComandas</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
