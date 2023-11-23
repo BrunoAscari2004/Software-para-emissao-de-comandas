@@ -1,4 +1,4 @@
-package com.bgjm.service;
+/*package com.bgjm.service;
 
 import com.bgjm.repository.ProdutosParoquiaRepository;
 import com.bgjm.vo.ProdutosParoquiaVO;
@@ -40,3 +40,4 @@ public class ProdutosParoquiaService {
 		return entity;
 	}
 }
+*/

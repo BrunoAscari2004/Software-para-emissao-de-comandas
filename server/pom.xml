@@ -15,10 +15,10 @@
     <name>NLBaseReact</name>
     <description>Projeto Base em React</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
         <frontend-src-dir>${project.basedir}</frontend-src-dir>
-        <node.version>v14.17.0</node.version>
+        <node.version>v16.13.0</node.version>
         <yarn.version>v1.22.10</yarn.version>
     </properties>
     <dependencies>
@@ -149,7 +149,7 @@
                             <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${frontend-src-dir}/target/static</directory>
+                                    <directory>${project.basedir}/target/dist</directory>
                                     <filtering>false</filtering>
                                 </resource>
                             </resources>

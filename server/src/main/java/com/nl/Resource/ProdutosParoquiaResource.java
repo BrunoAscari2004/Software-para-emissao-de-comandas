@@ -1,4 +1,4 @@
-package com.bgjm.web.rest;
+/*package com.bgjm.web.rest;
 
 import com.bgjm.domain.ext.ProdutosParoquiaCRUD;
 import com.bgjm.service.ProdutosParoquiaService;
@@ -41,3 +41,4 @@ public class ProdutosParoquiaResource {
 		return ResponseEntity.noContent().build();
 	}
 }
+*/
