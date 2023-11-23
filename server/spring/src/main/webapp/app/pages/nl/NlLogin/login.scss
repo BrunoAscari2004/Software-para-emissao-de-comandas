@@ -1,0 +1,87 @@
+/* ==========================================================================
+Main page styles
+========================================================================== */
+.login-subtitle {
+  margin-top: 0.5em;
+  font-family: 'Trebuchet MS';
+  font-size: 20px;
+  color: #828282;
+  font-weight: bold;
+}
+
+.login-text {
+  font-family: 'Trebuchet MS';
+  color: #828282;
+  font-weight: bold;
+  line-height: 1.846153846;
+  font-size: 13px;
+}
+
+.login-text-container {
+  padding: 10px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.login-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  a {
+    font-size: 13px;
+    color: #000;
+    font-weight: normal;
+  }
+
+  > img {
+    margin-top: 30px;
+  }
+}
+
+.login-input-container {
+  margin-top: 40px;
+
+  & > div {
+    margin-top: 20px;
+
+    p {
+      margin: 0;
+      text-align: left;
+      font-size: 16px;
+      font-weight: bold;
+      color: #313534;
+    }
+  }
+}
+
+.login-input {
+  width: 100%;
+  background: #f9f9f9;
+  padding: 0 5px;
+}
+
+.login-checkbox-container {
+  & + & {
+    margin-left: 10px;
+  }
+
+  display: flex;
+  align-items: center;
+  padding: 10px 0px;
+
+  > span {
+    font-size: 13px;
+  }
+
+  .MuiButtonBase-root {
+    padding: 0;
+  }
+}
+
+.login-enter-button {
+  display: flex;
+  justify-content: center;
+}
