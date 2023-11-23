@@ -1,6 +1,7 @@
 package com.nl.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nl.domain.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class ProdutosParoquiaRepository implements Serializable {
 
     private Path storage;
 
-    private Map<Long, ProdutosParoquia> data;
+    private Map<Long, Product> data;
 
     public ProdutosParoquiaRepository(final ProdutosParoquiaProps props,
                                       final ObjectMapper mapper) {
@@ -44,13 +45,13 @@ public class ProdutosParoquiaRepository implements Serializable {
         logger.info("Produtos paroquia created!");
     }
 
-    public ProdutosParoquia save(final ProdutosParoquia produtosparoquia) throws IOException {
-        if (Objects.isNull(produtosparoquia.getCodCliente())) {
-            produtosparoquia.setCodCliente(this.data.keySet().stream().max(Long::compareTo).orElse(0L) + 1L);
+    public Product save(final Product product) throws IOException {
+        if (Objects.isNull(product.getId())) {
+            product.setId(this.data.keySet().stream().max(Long::compareTo).orElse(0L) + 1L);
         }
-        this.data.put(produtosparoquia.getCodCliente(), produtosparoquia);
+        this.data.put(product.getId(), product);
         this.saveStorage();
-        return produtosparoquia;
+        return product;
     }
 
     public void remove(final Long id) throws IOException {
@@ -58,11 +59,11 @@ public class ProdutosParoquiaRepository implements Serializable {
         this.saveStorage();
     }
 
-    public Collection<ProdutosParoquia> findAll() {
+    public Collection<Product> findAll() {
         return this.data.values();
     }
 
-    public ProdutosParoquia findById(final Long id) {
+    public Product findById(final Long id) {
         return this.data.getOrDefault(id, null);
     }
 
@@ -79,8 +80,8 @@ public class ProdutosParoquiaRepository implements Serializable {
 
         data = new HashMap<>();
         for (final File file : files) {
-            ProdutosParoquia m = mapper.readValue(file, ProdutosParoquia.class);
-            data.put(m.getCodCliente(), m);
+            Product m = mapper.readValue(file, Product.class);
+            data.put(m.getId(), m);
         }
 
     }
@@ -104,7 +105,7 @@ public class ProdutosParoquiaRepository implements Serializable {
             }
         }
 
-        for (final Map.Entry<Long, ProdutosParoquia> entry : data.entrySet()) {
+        for (final Map.Entry<Long, Product> entry : data.entrySet()) {
             File f = storage.resolve(String.valueOf(entry.getKey())).toFile();
             if (f.createNewFile()) {
                 mapper.writeValue(f, entry.getValue());
