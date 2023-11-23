@@ -1,9 +1,8 @@
-package com.bgjm.service;
+package com.nl.Service;
 
-import com.bgjm.repository.ProdutosParoquiaRepository;
-import com.bgjm.vo.ProdutosParoquiaVO;
-import com.bgjm.domain.ext.ProdutosParoquiaCRUD;
 
+import com.nl.Printer.PrinterMain;
+import com.nl.domain.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,32 +10,49 @@ import java.util.Optional;
 
 @Service
 public class ProdutosParoquiaService {
+    /*
 	private final ProdutosParoquiaRepository produtosParoquiaRepository;
 	public ProdutosParoquiaService(final ProdutosParoquiaRepository produtosParoquiaRepository){
 		this.produtosParoquiaRepository = produtosParoquiaRepository;
 	}
 
-	public List<ProdutosParoquiaCRUD> findAll(){
+	public List<Product> findAll(){
 		return this.produtosParoquiaRepository.findAll();
 	}
 
-	public Optional<ProdutosParoquiaCRUD> findOne(final Long codProduto) {
+	public Optional<Product> findOne(final Long codProduto) {
 		return this.produtosParoquiaRepository.findById(codProduto);
 	}
-	public ProdutosParoquiaCRUD save (final ProdutosParoquiaVO vo){
-		return this.produtosParoquiaRepository.save(this.toEntity(vo));
+	public Product save (final Product product){
+		return this.produtosParoquiaRepository.save(this.toEntity(product));
 	}
+
+    //2 saves
+
+
+
+
 
 	public void deleteById(final Long codProduto) {
 		this.produtosParoquiaRepository.deleteById(codProduto);
 	}
 
-	private ProdutosParoquiaCRUD toEntity (final ProdutosParoquiaVO vo) {
-		ProdutosParoquiaCRUD entity = new ProdutosParoquiaCRUD();
-		entity.setCodProduto(vo.getCodProduto());
-		entity.setDesProduto(vo.getDesProduto());
-		entity.setValorProduto(vo.getValorProduto());
-		entity.setQuantidadeTotal(vo.getQuantidadeTotal());
+	private Product toEntity (final ProdutosParoquiaVO vo) {
+		Product entity = new Product();
+		entity.getId(vo.getCodProduto());
+		entity.getNome(vo.getDesProduto());
+		entity.getPreco(vo.getValorProduto());
+		entity.getQuantidade(vo.getQuantidadeTotal());
 		return entity;
 	}
+
+	final List<Product> productsToPrint
+	*/
+
+	 public void printAll() throws Exception {
+         PrinterMain.printComanda();
+
+     }
+
 }
+

@@ -16,6 +16,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FiPrinter, FiSave } from "react-icons/fi";
 import { confirmationToast } from "../../shared/components/ConfirmationToast";
+//mport { api } from "@shared/services/api";
 
 const currencyFormatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -223,7 +224,8 @@ function Home() {
     console.log("Imprime e salva ", productsToPrint);
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Chamada À API
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await api.get(); //////////////////////////////////////////////////
     } catch (e) {
       console.error(e);
       toast.error("Não foi possível concluir a comunicação com o servidor");
