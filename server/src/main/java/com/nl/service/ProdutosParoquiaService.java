@@ -2,48 +2,33 @@ package com.nl.service;
 
 
 import com.nl.Printer.PrintingMain;
+import com.nl.domain.Product;
+import com.nl.repository.ProdutosParoquiaRepository;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.Collection;
 
 @Service
 public class ProdutosParoquiaService {
-    /*
-	private final ProdutosParoquiaRepository produtosParoquiaRepository;
-	public ProdutosParoquiaService(final ProdutosParoquiaRepository produtosParoquiaRepository){
-		this.produtosParoquiaRepository = produtosParoquiaRepository;
-	}
 
-	public List<Product> findAll(){
+    private final ProdutosParoquiaRepository produtosParoquiaRepository;
+
+    public ProdutosParoquiaService(final ProdutosParoquiaRepository produtosParoquiaRepository) {
+        this.produtosParoquiaRepository = produtosParoquiaRepository;
+    }
+
+	public Collection<Product> findAll(){
 		return this.produtosParoquiaRepository.findAll();
 	}
 
-	public Optional<Product> findOne(final Long codProduto) {
-		return this.produtosParoquiaRepository.findById(codProduto);
-	}
-	public Product save (final Product product){
-		return this.produtosParoquiaRepository.save(this.toEntity(product));
-	}
+    public void remove (final Long codId) throws IOException {
+        this.produtosParoquiaRepository.remove(codId);
+    }
 
-    //2 saves
-
-
-
-
-
-	public void deleteById(final Long codProduto) {
-		this.produtosParoquiaRepository.deleteById(codProduto);
-	}
-
-	private Product toEntity (final ProdutosParoquiaVO vo) {
-		Product entity = new Product();
-		entity.getId(vo.getCodProduto());
-		entity.getNome(vo.getDesProduto());
-		entity.getPreco(vo.getValorProduto());
-		entity.getQuantidade(vo.getQuantidadeTotal());
-		return entity;
-	}
-
-	final List<Product> productsToPrint
-	*/
+    public Product save (final Product product) throws IOException{
+        return this.produtosParoquiaRepository.save(product);
+    }
 
     public void printAll() throws Exception {
         PrintingMain.printAll();

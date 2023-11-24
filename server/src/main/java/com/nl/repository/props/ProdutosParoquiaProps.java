@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+
+@Component
 public class ProdutosParoquiaProps implements Serializable {
     private static final long serialVersionUID = -9108905580004582604L;
 

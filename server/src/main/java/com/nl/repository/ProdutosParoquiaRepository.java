@@ -54,8 +54,8 @@ public class ProdutosParoquiaRepository implements Serializable {
         return product;
     }
 
-    public void remove(final Long id) throws IOException {
-        this.data.remove(id);
+    public void remove(final Long codId) throws IOException {
+        this.data.remove(codId);
         this.saveStorage();
     }
 
