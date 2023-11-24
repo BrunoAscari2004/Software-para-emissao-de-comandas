@@ -11,7 +11,7 @@
     <groupId>com.nl</groupId>
     <artifactId>NLBaseReact</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>NLBaseReact</name>
     <description>Projeto Base em React</description>
     <properties>

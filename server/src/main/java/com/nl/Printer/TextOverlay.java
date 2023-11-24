@@ -10,25 +10,36 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
+ *
  */
 public class TextOverlay extends JPanel {
 
-    private BufferedImage image;
     PrinterJob printerJob = PrinterJob.getPrinterJob();
+    private BufferedImage image;
 
     public TextOverlay(String productName) throws PrinterException {
         try {
-            image = ImageIO.read(new File("/home/bruno.ascari@intranetnl.com.br/IdeaProjects/TesteDireto/src/ValePastelNoTextLargeWhite.png"));
+            image = ImageIO.read(
+                Objects.requireNonNull(getClass().getResourceAsStream("/ValePastelNoTextLargeWhite.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        image = process(image,productName);
+        image = adicionaFraseNaImagem(image, productName);
 
         ImagePrintPage imagePrintPage = new ImagePrintPage(image);
 
 
+        PageFormat pageFormat = this.criarPageFormat();
+
+        printerJob.setPrintable(imagePrintPage, pageFormat);
+
+        printerJob.print();
+    }
+
+    private PageFormat criarPageFormat() {
         PageFormat pageFormat = new PageFormat();
 
         Paper paper = new Paper();
@@ -38,9 +49,8 @@ public class TextOverlay extends JPanel {
         double heightMM = 130;
 
         double widthInch = widthMM * 2;
-        double heightInch = heightMM;
 
-        paper.setSize(widthInch * 6, heightInch * 3);
+        paper.setSize(widthInch * 6, heightMM * 3);
 
         double marginValue = 10;
 
@@ -48,31 +58,34 @@ public class TextOverlay extends JPanel {
         double marginRight = widthInch - marginValue;
 
         double marginTop = marginValue - 4;
-        double marginBottom = heightInch - marginValue;
+        double marginBottom = heightMM - marginValue;
 
 
-        paper.setImageableArea(marginLeft - 0.32, marginTop - 0.32, marginRight - marginLeft + (3 * marginValue) + 1.46, marginBottom - marginTop + (22 * marginValue + 4.76));
+        paper.setImageableArea(marginLeft - 0.32, marginTop - 0.32, marginRight - marginLeft + (3 * marginValue) + 1.46,
+            marginBottom - marginTop + (22 * marginValue + 4.76));
 
 
         pageFormat.setPaper(paper);
-
-        printerJob.setPrintable(imagePrintPage, pageFormat);
-
-        printerJob.print();
+        return pageFormat;
     }
 
-    private BufferedImage process(BufferedImage old,String productName) {
-        int w = old.getWidth() / 2;
-        int h = old.getHeight() / 2;
-        BufferedImage img = new BufferedImage(
-                w, h, BufferedImage.TYPE_INT_ARGB);
+    public static void create(String productName) throws PrinterException {
+
+        new TextOverlay(productName);
+
+    }
+
+    private BufferedImage adicionaFraseNaImagem(BufferedImage image, String produto) {
+        int w = image.getWidth() / 2;
+        int h = image.getHeight() / 2;
+        BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
-        g2d.drawImage(old, 0, 30, w, h, this);
+        g2d.drawImage(image, 0, 30, w, h, this);
         g2d.setPaint(Color.black);
-        g2d.setFont(new Font("Sans-serif", Font.TRUETYPE_FONT, 35));
-        String s = "Vale 1 " + productName;
+        g2d.setFont(new Font("Sans-serif", Font.PLAIN, 35));
+        String s = "Vale 1 " + produto;
         FontMetrics fm = g2d.getFontMetrics();
-        int x = (img.getWidth() - fm.stringWidth(s))/2  ;
+        int x = (img.getWidth() - fm.stringWidth(s)) / 2;
         int y = fm.getHeight() + 320;
         g2d.drawString(s, x, y);
         g2d.dispose();
@@ -83,13 +96,5 @@ public class TextOverlay extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, null);
-    }
-
-    public static void create(String productName) throws PrinterException {
-        JFrame f = new JFrame();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(new TextOverlay(productName));
-        f.pack();
-        f.setVisible(true);
     }
 }

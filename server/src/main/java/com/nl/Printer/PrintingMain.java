@@ -4,7 +4,7 @@ import java.awt.print.PrinterException;
 
 public class PrintingMain {
 
-    public void printAll() throws PrinterException {
+    public static void printAll() throws PrinterException {
         TextOverlay.create("Água");
     }
 

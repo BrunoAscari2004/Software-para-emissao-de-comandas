@@ -37,9 +37,10 @@ public class ProdutosParoquiaResource {
 	}*/
 
 
-    public ResponseEntity printAll() throws Exception {
+    @GetMapping
+    public ResponseEntity<String> printAll() throws Exception {
         this.produtosParoquiaService.printAll();
-        return (ResponseEntity) ResponseEntity.ok();
+        return ResponseEntity.ok("Teste");
     }
 
 }

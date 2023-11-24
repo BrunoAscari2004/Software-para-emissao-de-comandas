@@ -46,7 +46,7 @@ public class ProdutosParoquiaService {
 	*/
 
 	 public void printAll() throws Exception {
-         PrintingMain();
+        PrintingMain.printAll();
 
      }
 
