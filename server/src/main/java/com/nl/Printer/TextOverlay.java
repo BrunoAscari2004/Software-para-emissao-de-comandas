@@ -36,7 +36,8 @@ public class TextOverlay extends JPanel {
 
         printerJob.setPrintable(imagePrintPage, pageFormat);
 
-        printerJob.print();
+            printerJob.print();
+
     }
 
     private PageFormat criarPageFormat() {

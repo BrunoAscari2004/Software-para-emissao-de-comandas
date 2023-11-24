@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="paroquia">
+    <output-path>$PROJECT_DIR$/out/artifacts/paroquia</output-path>
+    <root id="root" />
+  </artifact>
+</component>

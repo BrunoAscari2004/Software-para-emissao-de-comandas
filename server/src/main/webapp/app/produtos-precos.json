@@ -1,0 +1,6 @@
+[
+  { "id": 1, "produto": "Pastel", "preco": 5.0 },
+  { "id": 2, "produto": "Pipoca", "preco": 2.0 },
+  { "id": 3, "produto": "Cachorro-Quente", "preco": 5.5 },
+  { "id": 4, "produto": "Refrigerante", "preco": 4.5 }
+]
