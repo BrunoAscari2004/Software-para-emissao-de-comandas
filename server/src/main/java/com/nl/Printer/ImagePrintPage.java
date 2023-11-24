@@ -14,6 +14,8 @@ public class ImagePrintPage implements Printable {
         this.imageToPrint = image;
     }
 
+
+
     public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException {
         if (pageIndex > 0) {
             return Printable.NO_SUCH_PAGE;
@@ -43,10 +45,8 @@ public class ImagePrintPage implements Printable {
         System.out.println("y:");
         System.out.println(y);
 
-
-
-
         // Adjust the y position for the image to leave space for the border
+
 
 
         // Draw the image with the adjusted position

@@ -1,12 +1,8 @@
 package com.nl.Service;
 
 
-import com.nl.Printer.PrinterMain;
-import com.nl.domain.Product;
+import com.nl.Printer.PrintingMain;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProdutosParoquiaService {
@@ -50,7 +46,7 @@ public class ProdutosParoquiaService {
 	*/
 
 	 public void printAll() throws Exception {
-         PrinterMain.printComanda();
+         PrintingMain();
 
      }
 
